@@ -62,11 +62,12 @@ class fail2ban (
   String $root_group                     =  $::operatingsystem ? {
     /(?i:FreeBSD|OpenBSD)/ => 'wheel',
     default                => 'root',
-  }
+  },
+  Boolean $use_epel_mod          = true,
   ) {
-
-  require ::epel
-
+  
+  if $use_epel_mod == true { require ::epel }
+  
   contain ::fail2ban::install
   contain ::fail2ban::config
   contain ::fail2ban::service
