@@ -59,13 +59,15 @@ class fail2ban (
   Optional[String] $action                = undef,
   Optional[Enum['yes', 'no', 'warn']] $usedns = undef,
   Boolean $purge_jail_directory          = true,
-  String $root_group                     =  $::operatingsystem ? {
+  String $root_group                     =  $facts['os']['name'] ? {
     /(?i:FreeBSD|OpenBSD)/ => 'wheel',
     default                => 'root',
   }
   ) {
-
-  require ::epel
+ 
+  if $facts['os']['family'] == 'Redhat' {
+    require ::epel
+  }
 
   contain ::fail2ban::install
   contain ::fail2ban::config
