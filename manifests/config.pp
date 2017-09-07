@@ -37,6 +37,7 @@ class fail2ban::config {
     group   => $root_group,
     mode    => '0400',
     content => template("${module_name}/fail2ban.local.erb"),
+    notify  => Class['::fail2ban::service'],
   }
 
   # Wheezy doesn't seem to support the jail.d pattern, so we
@@ -49,9 +50,10 @@ class fail2ban::config {
       }
     }
     concat { '/etc/fail2ban/jail.local':
-      owner => 'root',
-      group => $root_group,
-      mode  => '0644',
+      owner  => 'root',
+      group  => $root_group,
+      mode   => '0644',
+      notify => Class['::fail2ban::service'],
     }
     concat::fragment { 'jail_header':
       target  => '/etc/fail2ban/jail.local',
@@ -68,6 +70,7 @@ class fail2ban::config {
       owner   => 'root',
       group   => $root_group,
       mode    => '0700',
+      notify  => Class['::fail2ban::service'],
     }
     file { '/etc/fail2ban/jail.local':
       ensure  => file,
@@ -75,6 +78,7 @@ class fail2ban::config {
       group   => $root_group,
       mode    => '0400',
       content => template("${module_name}/jail.local.erb"),
+      notify  => Class['::fail2ban::service'],
     }
   }
 
