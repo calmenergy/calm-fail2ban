@@ -7,7 +7,6 @@
   "source": "https://github.com/calmenergy/calmenergy-fail2ban",
   "project_page": "https://github.com/calmenergy/calmenergy-fail2ban",
   "issues_url": "https://github.com/calmenergy/calmenergy-fail2ban/issues",
-  "data_provider": "hiera",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
