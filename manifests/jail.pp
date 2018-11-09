@@ -94,6 +94,7 @@ define fail2ban::jail (
       owner   => 'root',
       group   => $::fail2ban::config::root_group,
       mode    => '0644',
+      notify  => Service['fail2ban'],
     }
   }
   }
